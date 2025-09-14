@@ -6,9 +6,9 @@ project:
   tiles: "1x1"    # Project size
 
 source_files:
-  - spiperipheral.v
-  - pwm_peripheral.v
   - project.v
+  - pwm_peripheral.v
+  - spiperipheral.v
 
 # NOT REQUIRED
 pinout:

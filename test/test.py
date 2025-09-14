@@ -155,6 +155,9 @@ async def test_pwm_freq(dut):
     clock = Clock(dut.clk, 10, units="ns")
     cocotb.start_soon(clock.start())
     
+    # Enable the design
+    dut.ena.value = 1
+    
     # Reset the system
     dut.rst_n.value = 0
     await ClockCycles(dut.clk, 10)
@@ -196,6 +199,9 @@ async def test_pwm_duty(dut):
     # Start the clock (100 MHz)
     clock = Clock(dut.clk, 10, units="ns")
     cocotb.start_soon(clock.start())
+    
+    # Enable the design
+    dut.ena.value = 1
     
     # Reset the system
     dut.rst_n.value = 0

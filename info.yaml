@@ -3,6 +3,7 @@ project:
   author: "Noah Harman"
   description: "SPI-controlled PWM peripheral for Tiny Tapeout."
   top_module: "tt_um_uwasic_onboarding_Noah_Harman"
+  tiles: "1x1"    # Project size
 
 source_files:
   - spiperipheral.v

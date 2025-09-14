@@ -1,10 +1,11 @@
-title: "ASIC Onboarding Project - Noah Harman"
-author: "Noah Harman"
-description: "SPI-controlled PWM peripheral for Tiny Tapeout."
-top_module: "tt_um_uwasic_onboarding_Noah_Harman"
+project:
+  title: "ASIC Onboarding Project - Noah Harman"
+  author: "Noah Harman"
+  description: "SPI-controlled PWM peripheral for Tiny Tapeout."
+  top_module: "tt_um_uwasic_onboarding_Noah_Harman"
 
 source_files:
-  - "spi peripheral"
+  - spiperipheral.v
   - pwm_peripheral.v
   - project.v
 

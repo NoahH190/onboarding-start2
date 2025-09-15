@@ -62,30 +62,33 @@ always @(posedge clk or negedge rst_n) begin
         shift_reg      <= 16'd0;
         bit_cnt        <= 5'd0;
         in_frame       <= 1'b0;
-    end else if (ncs_fall) begin
-        in_frame <= 1'b1;
-        bit_cnt  <= 5'd0;
-    end
+    end else begin
+        if (ncs_fall) begin
+            in_frame <= 1'b1;
+            bit_cnt  <= 5'd0;
+        end
+
     if (in_frame && !ncs_sync && sclk_rise) begin
-        shift_reg <= {shift_reg[14:0], copi_sync};
-        bit_cnt   <= bit_cnt + 5'd1;
-        if (bit_cnt == 5'd15) begin
+            shift_reg <= {shift_reg[14:0], copi_sync};
+            bit_cnt   <= bit_cnt + 5'd1;
+
+            if (bit_cnt == 5'd15) begin
+                in_frame <= 1'b0;
+                
+                if (shift_reg[15]) begin
+                     case (shift_reg[14:8])
+                        7'h00: en_out[7:0]        <= shift_reg[7:0];
+                        7'h01: en_out[15:8]       <= shift_reg[7:0];
+                        7'h02: en_pwm_mode[7:0]   <= shift_reg[7:0];
+                        7'h03: en_pwm_mode[15:8]  <= shift_reg[7:0];
+                        7'h04: pwm_duty_cycle     <= shift_reg[7:0];
+                        default: ;
+                    endcase
+                end
+            end           
+        end
+        if (ncs_sync) begin
             in_frame <= 1'b0;
-            if (shift_reg[15]) begin
-                case (shift_reg[14:8])
-                    7'h00: en_out[7:0]        <= shift_reg[7:0];
-                    7'h01: en_out[15:8]       <= shift_reg[7:0];
-                    7'h02: en_pwm_mode[7:0]   <= shift_reg[7:0];
-                    7'h03: en_pwm_mode[15:8]  <= shift_reg[7:0];
-                    7'h04: pwm_duty_cycle     <= shift_reg[7:0];
-                    default: ;
-                endcase
-            end
-        end           
+       end
     end
-    if (ncs_sync) begin
-        in_frame <= 1'b0;
-    end
-end
-            
 endmodule

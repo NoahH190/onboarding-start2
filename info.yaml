@@ -5,11 +5,10 @@ project:
   language: "Verilog" 
   top_module: "tt_um_uwasic_onboarding_Noah_Harman"
   tiles: "1x1"    # Project size
-
-source_files:
-  - project.v
-  - pwm_peripheral.v
-  - spiperipheral.v
+  source_files:
+    - project.v
+    - pwm_peripheral.v
+    - spiperipheral.v
 
 # NOT REQUIRED
 pinout:
